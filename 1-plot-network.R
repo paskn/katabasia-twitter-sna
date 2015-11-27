@@ -15,24 +15,11 @@ gplot(g, jitter=TRUE, usecurv=TRUE,
 dev.off()
 par(opar)
 
-# сеть нодов с высокой betweenness
-hbnames <- unique(ifelse(betweenness(g) > 11000, unique(as.character(katab_ego_sub$ed1)), NA))
-high_btw <- subset(data.frame(katab_ego), ed1 %in% hbnames & ed2 %in% hbnames)
-network_hb <- graph_from_data_frame(high_btw)
-g_hb <- get.adjacency(network_hb,sparse=FALSE)
-CairoPNG("./plots/katab_ego.png", width = 1600, height = 1600)
-par(mar=c(.01,.01,.01,.01))
-gplot(g_hb, jitter=TRUE, usecurv=TRUE,
-      mode = "target", gmode = "graph",
-      label = ifelse(betweenness(g) > 11000, unique(as.character(katab_ego_sub$ed1)), NA),
-      label.cex=2, edge.col = "gray")
-dev.off()
-par(opar)
-
 # ищем сообщества в нашей сети
 imc <- infomap.community(network)
-membership(imc)
-communities(imc)
+
+#membership(imc)
+#communities(imc)
 
 #plot(imc, network)
 gg <- network
