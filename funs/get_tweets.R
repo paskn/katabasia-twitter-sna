@@ -3,7 +3,9 @@
 get_tweets <- function(users) {
   label <- NULL
   tweets <- NULL
+  label_loop <- NULL
   for (i in 1:length(users)) {
+    label_loop <- NULL
     user_tweets = userTimeline(users[i], n=1000)
     
     user_df = twListToDF(user_tweets)
