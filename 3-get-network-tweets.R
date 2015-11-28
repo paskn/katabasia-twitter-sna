@@ -16,11 +16,15 @@ high_degree_nodes <- names(igraph::degree(network, mode="all")[igraph::degree(ne
 
 imc <- infomap.community(network)
 
+# sub graph of the high degree nodes
 high_degree_subnet <- subgraph.edges(network, V(network)[name %in% high_degree_nodes])
 hd_df <- as_data_frame(high_degree_subnet)
 
 hd_df$community <- imc$membership[imc$name %in% high_degree_nodes]
 
+# names of high degree users and communities they belong to
 twitter_sub <- data.frame(name = unique(c(hd_df$from,hd_df$to)),
                           community = imc$membership[imc$name %in% unique(c(hd_df$from,hd_df$to))])
 
+# trying to fetch users tweets
+test <- get_tweets(twitter_sub$name, 100, twitter_sub$community)
