@@ -12,7 +12,7 @@ load("./data/katab_lem.rda")
 #katab_tweets <- get_tweets('katab_asia')  # grab the tweets
 #katab_lem <- lemmatize(as.character(katab_tweets$Tweet))  # lemmatize them
 #save(katab_lem, file="./data/katab_lem.rda")
-
+write.csv(katab_lem, "./data/katab_lem.csv")
 katab_corpus = Corpus(VectorSource(katab_lem))
 
 # convert to lower case
@@ -63,10 +63,3 @@ wordcloud(katab_words_df$words, katab_words_df$freq,
           random.order=FALSE, colors=brewer.pal(8, "Dark2"))
 dev.off()
 par(opar)
-
-# topic modeling
-DTM <- DocumentTermMatrix(katab_corpus)
-rowTotals <- apply(DTM , 1, sum)
-DTM_new   <- DTM[rowTotals> 0, ]
-topics <- LDA(DTM_new, 5)
-terms(topics, 10)

@@ -1,5 +1,11 @@
+library(twitteR)
+library(igraph)
+library(stringr)
+library(sna)
+library(Cairo)
+
 load("./data/katab_ego.rda")
-network <- graph.edgelist(katab_ego)
+network <- graph.edgelist(katab_ego, directed = FALSE)
 g <- get.adjacency(network,sparse=FALSE)  # adjacency matrix нашего листа
 opar <- par(no.readonly = T)
 

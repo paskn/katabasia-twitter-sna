@@ -1,12 +1,12 @@
 # takes a list of users and download 1000 tweets for each
 # returns a data frame with tweets and user vars
-get_tweets <- function(users) {
+get_tweets <- function(users, n_tweets) {
   label <- NULL
   tweets <- NULL
   label_loop <- NULL
   for (i in 1:length(users)) {
     label_loop <- NULL
-    user_tweets = userTimeline(users[i], n=1000)
+    user_tweets = userTimeline(users[i], n=n_tweets)
     
     user_df = twListToDF(user_tweets)
     
