@@ -28,3 +28,13 @@ twitter_sub <- data.frame(name = unique(c(hd_df$from,hd_df$to)),
 
 # trying to fetch users tweets
 test <- get_tweets(as.character(twitter_sub$name)[1:155], as.character(twitter_sub$community)[1:155])
+test2 <- get_tweets(as.character(twitter_sub$name)[156], as.character(twitter_sub$community)[156])
+
+txt_data <- rbind(test, test2)
+
+# lemmatize tweets
+txt_data$Lem <- lemmatize(txt_data$Tweet)
+
+# Save txt data
+save(txt_data, file="./data/txt_data.rda")
+write.csv(txt_data, "./data/txt_data.csv")  # for mining with RtEmIs
