@@ -27,4 +27,4 @@ twitter_sub <- data.frame(name = unique(c(hd_df$from,hd_df$to)),
                           community = imc$membership[imc$name %in% unique(c(hd_df$from,hd_df$to))])
 
 # trying to fetch users tweets
-test <- get_tweets(twitter_sub$name, 100, twitter_sub$community)
+test <- get_tweets(as.character(twitter_sub$name)[1:155], as.character(twitter_sub$community)[1:155])
