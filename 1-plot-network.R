@@ -42,3 +42,17 @@ gplot(ad_gg, mode="kamadakawai", gmode = "graph",
       edge.col = "gray", label="katab_asia", label.cex = 2.2)
 dev.off()
 par(opar)
+
+# plot high degree nodes network
+high_degree_nodes <- names(igraph::degree(gg, mode="all")[igraph::degree(network, mode="all")>3])
+ad_gg_sub <- subgraph.edges(network, V(network)[name %in% high_degree_nodes])
+ad_gg_sub <- get.adjacency(ad_gg_sub,sparse=FALSE)
+CairoPNG("./plots/katab_ego_comm_sub.png", width = 1900, height = 1700)
+par(mar=c(.01,.01,.01,.01))
+gplot(ad_gg_sub, mode="kamadakawai", gmode = "graph",
+      vertex.col = V(gg)$color,
+      edge.col = "gray", displaylabels=T,
+      #label="katab_asia",
+      label.cex = 2.2)
+dev.off()
+par(opar)
