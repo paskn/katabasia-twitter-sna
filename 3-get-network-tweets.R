@@ -1,8 +1,3 @@
-# 1. subset names of user with degree > 3
-# 2. take their community var
-# 3. download their tweets (?)
-# 4. lemmatize them
-# 5. do correspondence analysis with the txts and community var
 library(twitteR)
 library(igraph)
 
@@ -34,7 +29,10 @@ txt_data <- rbind(test, test2)
 
 # lemmatize tweets
 txt_data$Lem <- lemmatize(txt_data$Tweet)
+txt_data$Lem[txt_data$Lem=="      "] <- NA
+txt_data$Cluster <- paste("comm", txt_data$Cluster, sep="")
 
 # Save txt data
 save(txt_data, file="./data/txt_data.rda")
 write.csv(txt_data, "./data/txt_data.csv")  # for mining with RtEmIs
+
